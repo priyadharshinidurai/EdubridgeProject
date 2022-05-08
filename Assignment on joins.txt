@@ -1,0 +1,91 @@
+Database system
+
+create table  salesman 
+(
+salesman _id int not null primary key,
+name varchar(20)  not null,
+city varchar(20)  not null,
+commission  varchar(20)  not null,
+)
+
+insert into salesman values (1000,'sri priya','bangalore',83.5);
+insert into salesman values (1002,'raga sri','mangalore',63.5);
+insert into salesman values (1003,'charu dharshana','new work',87.5);
+insert into salesman values (1004,'uhaya sri','chennai',93.5);
+insert into salesman values (1005,'candy vannan','parise',64.5);
+
+delete
+- - - -----  - - - -
+delete from salesman;
+select * from salesman;
+
+customer   
+create table customer 
+(
+customer _id int not null,
+customer _name varchar(20)  not null,
+city varchar(20)  not null,
+salesman _id int(10)  not null,
+primary key (customer _id),
+foreign key (salesman_id)referrences salesman (salesman_id) 
+
+1.write a same city
+
+select  customer.cust_name,
+salesman.name,salesman.city
+from salesman customer 
+where  salesman.city =customer .city;
+
+2.find salespersons return customer name ,city ,salesman ,commission.
+
+ select  customer.cust_name,
+ salesman.name from salesman, customer
+where  salesman.salesman_id=customer.salesman_id;
+
+3.find company more than 12%   return customer name ,city ,salesman ,commission.
+
+SELECT a.cust_name AS "customer name"
+a.city  b.name AS " salesman"  b.city ,b.commission
+INNER JOIN salesman b
+ON a.salesman _id=b.salesman _id
+WHERE B.commission >.12
+
+SELECT  a.cust_name  AS "customer name"
+a.city  b.name AS " salesman"  b.city ,b.commission
+FROM customer  a
+INNER JOIN salesman b
+ON a.salesman _id=b.salesman _id
+WHERE B.commission >.12
+AND a.city <>b.city;
+
+4.join on the tables customer and salesman relational rows will come 
+
+SELECT  * from orders;
+NATURAL JOIN customer
+NATURAL JOIN  salesman;
+
+
+5.display customer details &salesman city result should be ordered by asscending  on c_id
+
+SELECT   a.cust_name a. city ,a.grade ,b. name AS "salesman "b.city
+FROM customer a
+LEFT JION salesman b
+ON a. salesman _id =b.salesman _id  order by a. customer _id;
+
+6.find grade less than 300 c_city,c_name,grade,salesman ,salesman city  return should be ordered by asscending c_id
+
+SELECT   a.cust_name a. city ,a.grade ,b. name AS "salesman "b.city
+FROM customer a
+LEFT OUTER JION salesman b
+ON a. salesman _id =b.salesman _id 
+WHERE a.grade <300 ordered by a.customer _id;
+
+7.find that either of existing customer have placed no order or more than one orders.
+
+SELECT   a.cust_name ,a.city,b. ord_no,b.ord _date,b.purch_amt AS "order amount"
+FROM customer a
+LEFT OUTER JION  orders b
+ON a. customer _id =b.customer _id  order by b.ord_date;
+
+
+
